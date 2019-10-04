@@ -21,7 +21,8 @@ Meteor.methods({
       text: '',
       ownerId: this.userId,
       createdAt: new Date(),
-      username: Meteor.users.findOne(this.userId).username
+      username: Meteor.users.findOne(this.userId).username,
+      sharedWith: []
     });
   }
 });
