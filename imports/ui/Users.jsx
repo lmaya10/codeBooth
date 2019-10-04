@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import { Users as Us } from '../api/users.js';
 
 const Users = ({users}) => {
@@ -20,6 +21,8 @@ Users.propTypes = {
 };
 
 export default withTracker(() => {
+  Meteor.subscribe('users');
+
   return {
     users: Us.find({}).fetch()
   };
