@@ -1,4 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro&display=swap'); */
+
+:root {
+  --color1: #d9d2d5;
+  --color2: #204f59;
+  --color3: #56828c;
+  --color4: #736862;
+  --color5: #bf7a7a;
+  --color6: #bc536a;
+  --color7: #3d5163;
+  --color8: #abc05d;
+
+  --blue: rgb(137, 194, 255);
+  --yellow: rgb(255, 237, 131);
+  --orange: rgb(255, 173, 119);
+  --green: rgb(100, 222, 186);
+  --red: rgb(255, 129, 129);
+}
+
+html,
+body,
+#react-target {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  padding: 10px;
   font-family: sans-serif;
+  position: relative;
+  font-family: 'Source Code Pro', monospace;
+  /* font-family: 'Anonymous Pro', monospace; */
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+
+#react-target {
+  position: absolute;
+}
+
+#react-target > div {
+  display: grid;
 }

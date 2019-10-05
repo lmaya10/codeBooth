@@ -1,0 +1,39 @@
+.cssload-weird div {
+  background-color: transparent;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0px 21px var(--blue), 0px -21px var(--blue);
+  animation: cssload-rotate2 3.2s infinite linear;
+}
+.cssload-weird div:nth-child(2) {
+  box-shadow: 0px -43px var(--orange), 0px 43px var(--orange);
+  animation: cssload-rotate 2.995s infinite linear;
+}
+.cssload-weird div:nth-child(3) {
+  box-shadow: 0px 64px var(--green), 0px -64px var(--green);
+  animation: cssload-rotate2 2.8s infinite linear;
+}
+.cssload-weird div:nth-child(4) {
+  box-shadow: 0px -85px var(--red), 0px 85px var(--red);
+  animation: cssload-rotate 2.595s infinite linear;
+}
+.cssload-weird div:nth-child(5) {
+  box-shadow: 0px 106px var(--yellow), 0px -106px var(--yellow);
+  animation: cssload-rotate2 2.4s infinite linear;
+}
+
+@keyframes cssload-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cssload-rotate2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}

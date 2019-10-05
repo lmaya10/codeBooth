@@ -1,0 +1,42 @@
+#explorer > span {
+  display: block;
+  padding: 50px 0 0;
+  text-align: center;
+  font-size: 2em;
+  margin: 0;
+}
+
+#document-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 50px;
+  gap: 20px;
+}
+
+.document-card {
+  box-shadow: 0 1px 10px -5px black;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.document-card:hover {
+  background-color: var(--green);
+}
+
+.document-card > span {
+  display: block;
+  text-align: center;
+}
+
+.document-card > span:nth-child(1) {
+  font-weight: bold;
+  padding: 0 0 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.document-card > span:nth-child(2) {
+  color: gray;
+  padding: 10px 0 0;
+}

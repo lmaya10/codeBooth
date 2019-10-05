@@ -1,0 +1,27 @@
+#dashboard {
+  position: relative;
+  height: 100%;
+}
+
+#dashboard > span {
+  display: block;
+  padding: 50px 0 0;
+  text-align: center;
+  font-size: 2em;
+  margin: 0;
+}
+
+#dashboard > div > button {
+  background-color: var(--color8);
+  border: 1px solid var(--color8);
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  right: 50%;
+  bottom: 20px;
+  color: white;
+  box-shadow: 0 2px 10px -5px black;
+  transform: translateX(50%);
+}
