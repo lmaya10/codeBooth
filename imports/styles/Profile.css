@@ -33,7 +33,24 @@
   padding: 10px;
 }
 
+#profile > div:nth-child(1) > div:nth-child(2) > button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 #profile > div:nth-child(1) > div:nth-child(2) > button.active {
+  background-color: white;
+  color: var(--color7);
+}
+
+#profile > div:nth-child(1) > div:nth-child(3) > button {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 10px 20px;
+  color: white;
+}
+
+#profile > div:nth-child(1) > div:nth-child(3) > button:hover {
   background-color: white;
   color: var(--color7);
 }

@@ -24,11 +24,13 @@ const App = ({ user }) => {
   }, [toast]);
 
   useEffect(() => {
+    const logged = !!Meteor.userId();
+    
     if (state !== 3) {
-      if (user === null && state === 0) {
+      if (!logged && state === 0) {
         setState(1);
       }
-      else if (user) {
+      else if (logged) {
         setState(2);
       }
     }
@@ -57,10 +59,16 @@ const App = ({ user }) => {
     setState(3);
   };
 
+  const logOut = () => {
+    Meteor.logout(() => {
+      setState(0);
+    });
+  };
+
   const renders = {
     0: <Loader />,
     1: <Auth changeState={setState} showToast={showToast} />,
-    2: <Profile createDoc={createDoc} changeState={()=>setState} showDocument={showDocument} status={profileState} />,
+    2: <Profile createDoc={createDoc} showDocument={showDocument} status={profileState} logout={logOut} />,
     3: <Editor showToast={showToast} documentId={document ? document._id : undefined} showDocument={showDocument} />
   };
 
@@ -76,6 +84,7 @@ const App = ({ user }) => {
             <button onClick={() => goMenu(0)}>Explore</button>
             <button onClick={() => goMenu(1)}>Dashboard</button>
             <button onClick={() => goMenu(2)}>Settings</button>
+            <button onClick={logOut}>Log Out</button>
           </div>
         </div>
       </div>

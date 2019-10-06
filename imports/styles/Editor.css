@@ -30,6 +30,10 @@
   background-color: var(--blue);
 }
 
+#editor > div:nth-child(1) > button:nth-child(3).hidden {
+  display: none;
+}
+
 #editor > div:nth-child(1) > #name-container {
   padding: 0 20px;
   display: flex;

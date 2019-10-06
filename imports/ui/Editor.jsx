@@ -127,7 +127,9 @@ const Editor = ({ showToast, document, showDocument }) => {
             className={name ? 'non-empty' : ''} />
         </div>
         <button onClick={execute}><i className="fas fa-play"></i></button>
-        <button onClick={() => setShowShare(true)}><i className="fas fa-share-alt"></i></button>
+        <button className={docId ? '' : 'hidden'} onClick={() => setShowShare(true)}>
+          <i className="fas fa-share-alt" />
+        </button>
       </div>
       <div>
         <div id="editable">

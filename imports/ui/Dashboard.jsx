@@ -36,7 +36,8 @@ Dashboard.propTypes = {
 
 export default withTracker((props) => {
   Meteor.subscribe('documents');
-  const query = { username: Meteor.user().username };
+  const user = Meteor.user();
+  const query = { username: user && user.username };
   return {
     myDocuments: Documents.find(query).fetch(),
     ...props
