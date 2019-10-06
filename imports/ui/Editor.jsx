@@ -12,7 +12,7 @@ import Share from './Share';
 
 hljs.registerLanguage('javascript', javascript);
 
-const Editor = ({ showToast, document, showDocument }) => {
+const Editor = ({ showToast, document, showDocument, saveShare }) => {
 
   const [docId, setDocId] = useState(document ? document._id : undefined);
   const [name, setName] = useState(document ? document.title : '');
@@ -113,6 +113,11 @@ const Editor = ({ showToast, document, showDocument }) => {
     }
   };
 
+  const saveSharedWith = (shares) => {
+    setShowShare(false);
+    saveShare(docId, shares);
+  };
+
   return (
     <div id="editor">
       <div>
@@ -155,7 +160,7 @@ const Editor = ({ showToast, document, showDocument }) => {
           document={document}
           show={showShare}
           closeShare={() => setShowShare(false)}
-          saveShare={() => { }} />}
+          saveShare={saveSharedWith} />}
     </div>
   );
 };
@@ -164,7 +169,8 @@ Editor.propTypes = {
   showToast: PropTypes.func.isRequired,
   document: PropTypes.object,
   documentId: PropTypes.any,
-  showDocument: PropTypes.func.isRequired
+  showDocument: PropTypes.func.isRequired,
+  saveShare: PropTypes.func.isRequired
 };
 
 // export default Editor;

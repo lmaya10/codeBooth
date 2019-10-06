@@ -70,7 +70,7 @@ const Share = ({ document, show, closeShare, saveShare }) => {
           </div>
         </div>
         <div>
-          <button onClick={saveShare}>Ok</button>
+          <button onClick={() => saveShare(rows)}>Ok</button>
           <button onClick={closeShare}>Cancel</button>
         </div>
       </div>

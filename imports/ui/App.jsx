@@ -7,6 +7,7 @@ import '../styles/App.css';
 import Profile from './Profile';
 import Editor from './Editor';
 import Loader from './Loader';
+import { call } from '../utils/mongo';
 
 const App = ({ user }) => {
 
@@ -25,7 +26,7 @@ const App = ({ user }) => {
 
   useEffect(() => {
     const logged = !!Meteor.userId();
-    
+
     if (state !== 3) {
       if (!logged && state === 0) {
         setState(1);
@@ -65,11 +66,18 @@ const App = ({ user }) => {
     });
   };
 
+  const saveShare = (docId, shares) => {
+    (async () => {
+      const rta = await call('document.setShares', docId, shares);
+      console.log(rta);
+    })();
+  };
+
   const renders = {
     0: <Loader />,
     1: <Auth changeState={setState} showToast={showToast} />,
     2: <Profile createDoc={createDoc} showDocument={showDocument} status={profileState} logout={logOut} />,
-    3: <Editor showToast={showToast} documentId={document ? document._id : undefined} showDocument={showDocument} />
+    3: <Editor showToast={showToast} documentId={document ? document._id : undefined} showDocument={showDocument} saveShare={saveShare} />
   };
 
   return (

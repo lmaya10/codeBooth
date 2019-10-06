@@ -39,7 +39,7 @@ module.exports = {
         ],
         "max-len": [
             "error",
-            { "code": 135 }
+            { "code": 140 }
         ]
     }
 };
