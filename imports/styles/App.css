@@ -1,10 +1,9 @@
 #header {
   padding: 20px;
   height: calc(10vh - 40px);
-  /* background-color: var(--color2); */
-  /* color: white; */
   box-shadow: 0 5px 100px 5px rgba(0, 0, 0, 0.4);
   z-index: 100;
+  transition: all 0.6s ease-in-out;
 }
 
 #header.no-shadow {
