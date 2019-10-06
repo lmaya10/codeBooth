@@ -11,7 +11,7 @@ import { Meteor } from 'meteor/meteor';
 
 hljs.registerLanguage('javascript', javascript);
 
-const Editor = ({ showToast, document }) => {
+const Editor = ({ showToast, document, showDocument }) => {
 
   const [docId, setDocId] = useState(document ? document._id : undefined);
   const [name, setName] = useState(document ? document.title : '');
@@ -101,6 +101,7 @@ const Editor = ({ showToast, document }) => {
             const rta = await call('document.create', name, content);
             showToast({ state: 'Success', msg: 'Created!' });
             setDocId(rta);
+            showDocument({_id: rta});
           }
           catch (error) {
             showToast({ state: 'Error', msg: error });
@@ -152,6 +153,7 @@ Editor.propTypes = {
   showToast: PropTypes.func.isRequired,
   document: PropTypes.object,
   documentId: PropTypes.any,
+  showDocument: PropTypes.func.isRequired
 };
 
 // export default Editor;

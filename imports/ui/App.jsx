@@ -48,7 +48,7 @@ const App = ({ user }) => {
     0: <Loader />,
     1: <Auth changeState={setState} showToast={showToast} />,
     2: <Profile changeState={setState} showDocument={showDocument} />,
-    3: <Editor showToast={showToast} documentId={document ? document._id : undefined} />
+    3: <Editor showToast={showToast} documentId={document ? document._id : undefined} showDocument={showDocument} />
   };
 
   return (
