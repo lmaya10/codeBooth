@@ -19,22 +19,29 @@
   height: 90vh;
 }
 
-#error {
+#toast {
   position: fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--red);
-  color: white;
   padding: 10px 40px;
   border-radius: 10px;
   z-index: 100;
   box-shadow: 0 1px 10px -5px black;
   animation: shake 0.5s 1 ease-in-out;
+  display: none;
 }
 
-#error.hidden {
-  display: none;
+#toast.Error {
+  display: inherit;
+  background-color: var(--red);
+  color: white;
+}
+
+#toast.Success {
+  display: inherit;
+  background-color: var(--color8);
+  color: white;
 }
 
 @keyframes shake {

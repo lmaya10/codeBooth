@@ -6,7 +6,7 @@ import { Documents } from '../api/documents';
 import '../styles/Dashboard.css';
 import { formatDate } from '../utils/date';
 
-const Dashboard = ({ myDocuments, changeState }) => {
+const Dashboard = ({ myDocuments, changeState, showDocument }) => {
   return (
     <div id="dashboard">
       <span>My Dashboard</span>
@@ -16,7 +16,7 @@ const Dashboard = ({ myDocuments, changeState }) => {
         </button>
         <div id="document-container">
           {myDocuments.map((d, i) => (
-            <div key={i} className="document-card">
+            <div key={i} className="document-card" onClick={() => showDocument(d)}>
               <span>{d.title}</span>
               <span>{formatDate(d.createdAt)}</span>
               <span>{d.username}</span>
@@ -30,7 +30,8 @@ const Dashboard = ({ myDocuments, changeState }) => {
 
 Dashboard.propTypes = {
   myDocuments: PropTypes.array,
-  changeState: PropTypes.func.isRequired
+  changeState: PropTypes.func.isRequired,
+  showDocument: PropTypes.func.isRequired
 };
 
 export default withTracker((props) => {

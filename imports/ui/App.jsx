@@ -11,14 +11,15 @@ import Loader from './Loader';
 const App = ({ user }) => {
 
   const [state, setState] = useState(0);
-  const [error, setError] = useState(undefined);
+  const [toast, setToast] = useState(undefined);
+  const [document, setDocument] = useState(undefined);
 
   useEffect(() => {
-    if (error) {
-      const timeout = setTimeout(() => setError(undefined), 3000);
+    if (toast) {
+      const timeout = setTimeout(() => setToast(undefined), 3000);
       return () => clearTimeout(timeout);
     }
-  }, [error]);
+  }, [toast]);
 
   useEffect(() => {
     if (state !== 3) {
@@ -31,13 +32,23 @@ const App = ({ user }) => {
     }
   }, [user, state]);
 
-  const showError = (msg) => setError(msg);
+  useEffect(() => {
+    if (document) {
+      setState(3);
+    }
+  }, [document]);
+
+  const showDocument = (d) => {
+    setDocument(d);
+  };
+
+  const showToast = (to) => setToast(to);
 
   const renders = {
     0: <Loader />,
-    1: <Auth changeState={setState} showError={showError} />,
-    2: <Profile changeState={setState} />,
-    3: <Editor />
+    1: <Auth changeState={setState} showToast={showToast} />,
+    2: <Profile changeState={setState} showDocument={showDocument} />,
+    3: <Editor showToast={showToast} documentId={document ? document._id : undefined} />
   };
 
   return (
@@ -48,7 +59,7 @@ const App = ({ user }) => {
       <div id="content">
         {renders[state]}
       </div>
-      <div id="error" className={error ? '' : 'hidden'}>{error}</div>
+      <div id="toast" className={toast ? toast.state : ''}>{toast ? toast.msg : ''}</div>
     </div>
   );
 };

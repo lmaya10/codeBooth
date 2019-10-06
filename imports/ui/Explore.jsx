@@ -6,13 +6,13 @@ import { Documents } from '../api/documents';
 import '../styles/Explorer.css';
 import { formatDate } from '../utils/date';
 
-const Explore = ({ documents }) => {
+const Explore = ({ documents, showDocument }) => {
   return (
     <div id="explorer">
       <span>Explore Scripts</span>
       <div id="document-container">
         {documents.map((d, i) => (
-          <div key={i} className="document-card">
+          <div key={i} className="document-card" onClick={() => showDocument(d)}>
             <span>{d.title}</span>
             <span>{formatDate(d.createdAt)}</span>
             <span>{d.username}</span>
@@ -24,7 +24,8 @@ const Explore = ({ documents }) => {
 };
 
 Explore.propTypes = {
-  documents: PropTypes.array
+  documents: PropTypes.array,
+  showDocument: PropTypes.func.isRequired
 };
 
 export default withTracker(() => {

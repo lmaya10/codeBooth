@@ -1,33 +1,50 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
 import '../styles/Editor.css';
 import '../styles/codeSyntax.css';
+import { call } from '../utils/mongo';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Documents } from '../api/documents';
+import { Meteor } from 'meteor/meteor';
 
 hljs.registerLanguage('javascript', javascript);
 
-Function.prototype.clone = function () {
-  var that = this;
-  var temp = function temporary() {
-    return that.apply(this, arguments);
-  };
-  for (var key in this) {
-    if (this.hasOwnProperty(key)) {
-      temp[key] = this[key];
-    }
-  }
-  return temp;
-};
+const Editor = ({ showToast, document }) => {
 
-const Editor = () => {
-
-  const [content, setContent] = useState('');
+  const [docId, setDocId] = useState(document ? document._id : undefined);
+  const [name, setName] = useState(document ? document.title : '');
+  const [content, setContent] = useState(document ? document.text : '');
   const [output, setOutput] = useState('');
   const inputRef = useRef(null);
   const outputRef = useRef(null);
 
+  useEffect(() => {
+    if (document) {
+      setContent(document.text);
+      setName(document.title);
+      setDocId(document._id);
+    }
+  }, [document]);
 
-  useEffect(() => refreshHighlighting(), [content]);
+  useEffect(() => {
+    refreshHighlighting();
+  }, [content]);
+
+  useEffect(() => {
+    if (docId) {
+      (async () => {
+        try {
+          await call('document.update', docId, name, content);
+          // showToast({ state: 'Success', msg: 'Ok' });
+        }
+        catch (error) {
+          showToast({ state: 'Error', msg: error });
+        }
+      })();
+    }
+  }, [content, name, docId]);
 
   const refreshHighlighting = () => {
     hljs.highlightBlock(outputRef.current);
@@ -61,26 +78,62 @@ const Editor = () => {
     outputRef.current.scrollTop = e.target.scrollTop;
   };
   const execute = () => {
-    const rtas = [];
-    console.oldLog = console.log;
-    console.log = (a) => rtas.push(a);
-    eval(content);
-    setOutput(rtas.join('\n'));
-    console.log = console.oldLog;
+    try {
+      const rtas = [];
+      console.oldLog = console.log;
+      console.log = (a) => rtas.push(a);
+      eval(content);
+      setOutput(rtas.join('\n'));
+      console.log = console.oldLog;
+    }
+    catch (error) {
+      setOutput('' + error);
+    }
+  };
+  const save = () => {
+    if (!document) {
+      if (!name) {
+        showToast({ state: 'Error', msg: 'Please provide a name to the document' });
+      }
+      else {
+        (async () => {
+          try {
+            const rta = await call('document.create', name, content);
+            showToast({ state: 'Success', msg: 'Created!' });
+            setDocId(rta);
+          }
+          catch (error) {
+            showToast({ state: 'Error', msg: error });
+          }
+        })();
+      }
+    }
   };
 
   return (
     <div id="editor">
       <div>
         <div id="name-container">
-          <button><i className="fas fa-save"></i></button>
-          <input placeholder="Unnamed Document" />
+          <button onClick={save}>
+            <i className="fas fa-save" />
+          </button>
+          <input
+            placeholder="Unnamed Document"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            className={name ? 'non-empty' : ''} />
         </div>
         <button onClick={execute}><i className="fas fa-play"></i></button>
       </div>
       <div>
         <div id="editable">
-          <textarea ref={inputRef} autoFocus onKeyDown={bindKeys} onChange={onTextChange} onScroll={scrollHandler} />
+          <textarea
+            ref={inputRef}
+            autoFocus
+            onKeyDown={bindKeys}
+            onChange={onTextChange}
+            onScroll={scrollHandler}
+            value={content} />
           <pre>
             <code ref={outputRef}>
               {content}
@@ -95,4 +148,18 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+Editor.propTypes = {
+  showToast: PropTypes.func.isRequired,
+  document: PropTypes.object,
+  documentId: PropTypes.any,
+};
+
+// export default Editor;
+export default withTracker((props) => {
+  Meteor.subscribe('documents');
+
+  return {
+    document: props.documentId ? Documents.findOne({ _id: props.documentId }) : undefined,
+    ...props
+  };
+})(Editor);

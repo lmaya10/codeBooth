@@ -6,13 +6,13 @@ import '../styles/Profile.css';
 import Explore from './Explore';
 import Dashboard from './Dashboard';
 
-const Profile = ({ user, changeState }) => {
+const Profile = ({ user, changeState, showDocument }) => {
 
   const [state, setState] = useState(1);
 
   const renders = {
-    0: <Explore />,
-    1: <Dashboard changeState={changeState}/>,
+    0: <Explore showDocument={showDocument}/>,
+    1: <Dashboard changeState={changeState} showDocument={showDocument}/>,
     2: undefined
   };
 
@@ -37,7 +37,8 @@ const Profile = ({ user, changeState }) => {
 
 Profile.propTypes = {
   user: PropTypes.object,
-  changeState: PropTypes.func.isRequired
+  changeState: PropTypes.func.isRequired,
+  showDocument: PropTypes.func.isRequired
 };
 
 export default withTracker((props) => {

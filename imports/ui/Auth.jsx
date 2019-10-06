@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import '../styles/Auth.css';
 
-const Auth = ({ changeState, showError }) => {
+const Auth = ({ changeState, showToast }) => {
 
   const [state, setState] = useState(0);
   let _user = {
@@ -15,12 +15,12 @@ const Auth = ({ changeState, showError }) => {
 
   const login = () => {
     if (!_user.username || !_user.password) {
-      showError('Please provide all the fields');
+      showToast({ state: 'Error', msg: 'Please provide all the fields' });
     }
     else {
       Meteor.loginWithPassword(_user.username, _user.password, (err) => {
         if (err) {
-          showError(err.message);
+          showToast({ state: 'Error', msg: err.message });
         }
         else {
           changeState(2);
@@ -32,11 +32,11 @@ const Auth = ({ changeState, showError }) => {
   const signup = () => {
     _user.username = _user.username.replace(/\W/g, '');
     if (!_user.username || !_user.password || !_user.confirmPassword) {
-      showError('Please provide all the fields');
+      showToast({ state: 'Error', msg: 'Please provide all the fields' });
     }
     else {
       if (_user.password !== _user.confirmPassword) {
-        showError('Password does not match');
+        showToast({ state: 'Error', msg: 'Password does not match' });
       }
       else {
         Accounts.createUser({
@@ -44,7 +44,7 @@ const Auth = ({ changeState, showError }) => {
           password: _user.password
         }, err => {
           if (err) {
-            showError(err.message);
+            showToast(err.message);
           }
           else {
             changeState(2);
@@ -101,7 +101,7 @@ const Auth = ({ changeState, showError }) => {
 
 Auth.propTypes = {
   changeState: PropTypes.func.isRequired,
-  showError: PropTypes.func.isRequired
+  showToast: PropTypes.func.isRequired
 };
 
 export default Auth;

@@ -39,6 +39,12 @@
   margin-left: -15px;
   border: none;
   border-bottom: 2px solid var(--red);
+
+  font-family: Consolas, monospace;
+}
+
+#editor > div:nth-child(1) > #name-container > input.non-empty {
+  font-weight: bold;
 }
 
 #editor > div:nth-child(1) > #name-container > button {
