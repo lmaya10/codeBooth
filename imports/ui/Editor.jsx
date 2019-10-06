@@ -8,6 +8,7 @@ import { call } from '../utils/mongo';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Documents } from '../api/documents';
 import { Meteor } from 'meteor/meteor';
+import Share from './Share';
 
 hljs.registerLanguage('javascript', javascript);
 
@@ -17,6 +18,7 @@ const Editor = ({ showToast, document, showDocument }) => {
   const [name, setName] = useState(document ? document.title : '');
   const [content, setContent] = useState(document ? document.text : '');
   const [output, setOutput] = useState('');
+  const [showShare, setShowShare] = useState(false);
   const inputRef = useRef(null);
   const outputRef = useRef(null);
 
@@ -101,7 +103,7 @@ const Editor = ({ showToast, document, showDocument }) => {
             const rta = await call('document.create', name, content);
             showToast({ state: 'Success', msg: 'Created!' });
             setDocId(rta);
-            showDocument({_id: rta});
+            showDocument({ _id: rta });
           }
           catch (error) {
             showToast({ state: 'Error', msg: error });
@@ -125,6 +127,7 @@ const Editor = ({ showToast, document, showDocument }) => {
             className={name ? 'non-empty' : ''} />
         </div>
         <button onClick={execute}><i className="fas fa-play"></i></button>
+        <button onClick={() => setShowShare(true)}><i className="fas fa-share-alt"></i></button>
       </div>
       <div>
         <div id="editable">
@@ -145,6 +148,12 @@ const Editor = ({ showToast, document, showDocument }) => {
           <pre><code>{output}</code></pre>
         </div>
       </div>
+      {document &&
+        <Share
+          document={document}
+          show={showShare}
+          closeShare={() => setShowShare(false)}
+          saveShare={() => { }} />}
     </div>
   );
 };

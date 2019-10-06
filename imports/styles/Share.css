@@ -1,0 +1,108 @@
+#share {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+}
+
+#share.hidden {
+  display: none;
+}
+
+#share > #bg {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#share > #share-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 10px -5px black;
+  border-radius: 10px;
+
+  max-height: 80vh;
+  width: 30vw;
+}
+
+#share > #share-container > div:nth-child(1) {
+  text-align: center;
+  padding: 10px 0 20px;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(1) {
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(1) > div {
+  padding: 4px 0;
+  display: grid;
+  grid-template-columns: 10fr 2fr 1fr;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(1) > div > input {
+  padding: 5px 10px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(1) > div > select {
+  padding: 5px 10px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(1) > div > button {
+  background-color: transparent;
+  border: none;
+  color: var(--color6);
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(1) > div > button:hover {
+  background-color: var(--color6);
+  color: white;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(2) {
+  text-align: center;
+  margin: 10px;
+}
+
+#share > #share-container > div:nth-child(2) > div:nth-child(2) > button {
+  padding: 6px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+
+  border: 1px solid var(--color6);
+  background-color: white;
+  color: var(--color6);
+}
+
+#share > #share-container > div:nth-child(3) {
+  text-align: right;
+}
+
+#share > #share-container > div:nth-child(3) > button {
+  background-color: white;
+  border: 1px solid transparent;
+  padding: 5px 20px;
+}
+
+#share > #share-container > div:nth-child(3) > button:nth-child(1) {
+  background-color: var(--color6);
+  color: white;
+}
+
+#share > #share-container > div:nth-child(3) > button:hover {
+  background-color: white;
+  border: 1px solid var(--color6);
+  color: var(--color6);
+}

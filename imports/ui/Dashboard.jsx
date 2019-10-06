@@ -6,12 +6,12 @@ import { Documents } from '../api/documents';
 import '../styles/Dashboard.css';
 import { formatDate } from '../utils/date';
 
-const Dashboard = ({ myDocuments, changeState, showDocument }) => {
+const Dashboard = ({ myDocuments, createDoc, showDocument }) => {
   return (
     <div id="dashboard">
       <span>My Dashboard</span>
       <div>
-        <button onClick={() => changeState(3)}>
+        <button onClick={() => createDoc()}>
           <i className="fas fa-plus" />
         </button>
         <div id="document-container">
@@ -30,7 +30,7 @@ const Dashboard = ({ myDocuments, changeState, showDocument }) => {
 
 Dashboard.propTypes = {
   myDocuments: PropTypes.array,
-  changeState: PropTypes.func.isRequired,
+  createDoc: PropTypes.func.isRequired,
   showDocument: PropTypes.func.isRequired
 };
 

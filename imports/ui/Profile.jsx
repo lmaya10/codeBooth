@@ -6,13 +6,13 @@ import '../styles/Profile.css';
 import Explore from './Explore';
 import Dashboard from './Dashboard';
 
-const Profile = ({ user, changeState, showDocument }) => {
+const Profile = ({ user, createDoc, showDocument, status }) => {
 
-  const [state, setState] = useState(1);
+  const [state, setState] = useState(status);
 
   const renders = {
     0: <Explore showDocument={showDocument}/>,
-    1: <Dashboard changeState={changeState} showDocument={showDocument}/>,
+    1: <Dashboard createDoc={createDoc} showDocument={showDocument}/>,
     2: undefined
   };
 
@@ -24,7 +24,7 @@ const Profile = ({ user, changeState, showDocument }) => {
         </div>
         <div>
           <button className={state === 0 ? 'active' : ''} onClick={() => setState(0)}>Explore</button>
-          <button className={state === 1 ? 'active' : ''} onClick={() => setState(1)}>My Dashboard</button>
+          <button className={state === 1 ? 'active' : ''} onClick={() => setState(1)}>Dashboard</button>
           <button className={state === 2 ? 'active' : ''} onClick={() => setState(2)}>Settings</button>
         </div>
       </div>
@@ -37,8 +37,9 @@ const Profile = ({ user, changeState, showDocument }) => {
 
 Profile.propTypes = {
   user: PropTypes.object,
-  changeState: PropTypes.func.isRequired,
-  showDocument: PropTypes.func.isRequired
+  createDoc: PropTypes.func.isRequired,
+  showDocument: PropTypes.func.isRequired,
+  status: PropTypes.number
 };
 
 export default withTracker((props) => {

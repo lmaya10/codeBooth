@@ -35,8 +35,8 @@ Meteor.methods({
     const doc = Documents.findOne({ _id: docId });
     if (doc) {
       const ownerId = doc.ownerId;
-      const editableFor = doc.sharedWith.filter(s => ['Editor', 'Owner'].includes(s.rol)).map(s => s.userId);
-      if (ownerId === Meteor.user()._id || editableFor.includes(Meteor.user()._id)) {
+      const editableFor = doc.sharedWith.filter(s => ['Editor', 'Owner'].includes(s.rol)).map(s => s.username);
+      if (ownerId === Meteor.user()._id || editableFor.includes(Meteor.user().username)) {
         return callToColl(Documents, 'update', { _id: docId }, {
           $set: {
             title,

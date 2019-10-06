@@ -15,6 +15,49 @@
   margin: 0;
 }
 
+#header > #right-menu {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  height: 40px;
+}
+
+#header > #right-menu.hidden {
+  display: none;
+}
+
+#header > #right-menu > button {
+  height: 100%;
+  padding: 0;
+  background-color: white;
+  font-size: 2em;
+  border: none;
+}
+
+#header > #right-menu > div {
+  position: absolute;
+  right: 0;
+  display: grid;
+  background-color: white;
+  padding: 20px 0;
+  border: 1px solid lightgray;
+  box-shadow: 0 1px 10px -5px black;
+}
+
+#header > #right-menu > div.hidden {
+  display: none;
+}
+
+#header > #right-menu > div > button {
+  background-color: white;
+  border: 1px solid white;
+  padding: 5px 30px;
+}
+
+#header > #right-menu > div > button:hover {
+  border: 1px solid lightgray;
+}
+
 #content {
   height: 90vh;
 }

@@ -11,8 +11,10 @@ import Loader from './Loader';
 const App = ({ user }) => {
 
   const [state, setState] = useState(0);
+  const [profileState, setProfileState] = useState(1);
   const [toast, setToast] = useState(undefined);
   const [document, setDocument] = useState(undefined);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     if (toast) {
@@ -44,10 +46,21 @@ const App = ({ user }) => {
 
   const showToast = (to) => setToast(to);
 
+  const goMenu = (i) => {
+    setState(2);
+    setProfileState(i);
+    setShowMenu(false);
+  };
+
+  const createDoc = () => {
+    setDocument(undefined);
+    setState(3);
+  };
+
   const renders = {
     0: <Loader />,
     1: <Auth changeState={setState} showToast={showToast} />,
-    2: <Profile changeState={setState} showDocument={showDocument} />,
+    2: <Profile createDoc={createDoc} changeState={()=>setState} showDocument={showDocument} status={profileState} />,
     3: <Editor showToast={showToast} documentId={document ? document._id : undefined} showDocument={showDocument} />
   };
 
@@ -55,6 +68,16 @@ const App = ({ user }) => {
     <div>
       <div id="header" className={state === 3 ? 'no-shadow' : ''}>
         <h1>Code Booth</h1>
+        <div id="right-menu" className={state === 3 ? '' : 'hidden'}>
+          <button onClick={() => setShowMenu(s => !s)}>
+            <i className="fas fa-user-circle"></i>
+          </button>
+          <div className={showMenu ? '' : 'hidden'}>
+            <button onClick={() => goMenu(0)}>Explore</button>
+            <button onClick={() => goMenu(1)}>Dashboard</button>
+            <button onClick={() => goMenu(2)}>Settings</button>
+          </div>
+        </div>
       </div>
       <div id="content">
         {renders[state]}

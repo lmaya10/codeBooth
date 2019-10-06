@@ -24,6 +24,12 @@
   box-shadow: 0 1px 10px -5px black;
 }
 
+#editor > div:nth-child(1) > button:nth-child(3) {
+  right: 0;
+  left: auto;
+  background-color: var(--blue);
+}
+
 #editor > div:nth-child(1) > #name-container {
   padding: 0 20px;
   display: flex;
