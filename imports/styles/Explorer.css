@@ -19,6 +19,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
+  position: relative;
 }
 
 .document-card:hover {
@@ -39,4 +40,39 @@
 .document-card > span:nth-child(2) {
   color: gray;
   padding: 10px 0 0;
+}
+
+.document-card > div {
+  text-align: center;
+  margin: 5px 0 -5px;
+}
+
+.document-card > div > button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-radius: 50%;
+  color: white;
+  margin: 0 3px;
+}
+
+.document-card > div > button:nth-child(1) {
+  background-color: var(--color6);
+}
+
+.document-card > div > button:nth-child(1):hover {
+  border: 1px solid var(--color6);
+  color: var(--color6);
+  background-color: white;
+}
+
+.document-card > div > button:nth-child(2) {
+  background-color: var(--blue);
+}
+
+.document-card > div > button:nth-child(2):hover {
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  background-color: white;
 }

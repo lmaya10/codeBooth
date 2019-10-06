@@ -1,12 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Documents } from '../api/documents';
 import '../styles/Dashboard.css';
 import { formatDate } from '../utils/date';
+import { call } from '../utils/mongo';
 
 const Dashboard = ({ myDocuments, createDoc, showDocument }) => {
+
+  const [showDialog, setShowDialog] = useState({ show: false, docId: undefined });
+
+
+  const confirmDelete = () => {
+    (async () => {
+      await call('document.delete', showDialog.docId);
+      setShowDialog({ show: false, docId: undefined });
+    })();
+  };
+
+  const clickH = (st, docId) => {
+    return (e) => {
+      e.stopPropagation();
+      switch (st) {
+        case 0:
+          setShowDialog({ show: true, docId });
+          break;
+        case 1:
+          break;
+      }
+    };
+  };
+
   return (
     <div id="dashboard">
       <span>My Dashboard</span>
@@ -20,8 +45,26 @@ const Dashboard = ({ myDocuments, createDoc, showDocument }) => {
               <span>{d.title}</span>
               <span>{formatDate(d.createdAt)}</span>
               <span>{d.username}</span>
+              <div>
+                <button onClick={clickH(0, d._id)}>
+                  <i className="fas fa-trash" />
+                </button>
+                <button onClick={clickH(1, d._id)}>
+                  <i className="fas fa-share-alt" />
+                </button>
+              </div>
             </div>
           ))}
+        </div>
+      </div>
+      <div id="confirm-dialog" className={showDialog.show ? '' : 'hidden'}>
+        <div></div>
+        <div>
+          <div><span>Are you sure you want to delete this document?</span></div>
+          <div>
+            <button onClick={() => setShowDialog({ show: false, docId: undefined })}>Cancel</button>
+            <button onClick={confirmDelete}>Delete</button>
+          </div>
         </div>
       </div>
     </div>

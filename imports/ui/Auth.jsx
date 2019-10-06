@@ -58,11 +58,20 @@ const Auth = ({ changeState, showToast }) => {
     return (e) => (_user[key] = e.target.value);
   };
 
+  const enterKey = (s) => {
+    return (e) => {
+      if (e.key === 'Enter') {
+        return s === 0 ? login() : signup();
+      }
+    };
+  };
+
+
   const renders = [
     (
       <div key="1">
-        <input type="text" placeholder="Username" onChange={inputChange('username')} />
-        <input type="password" placeholder="Password" onChange={inputChange('password')} />
+        <input type="text" placeholder="Username" onChange={inputChange('username')} onKeyDown={enterKey(0)} />
+        <input type="password" placeholder="Password" onChange={inputChange('password')} onKeyDown={enterKey(0)} />
         <div>
           <button onClick={login}>Log In</button>
         </div>
@@ -70,9 +79,9 @@ const Auth = ({ changeState, showToast }) => {
     ),
     (
       <div key="2">
-        <input type="text" placeholder="Username" onChange={inputChange('username')} />
-        <input type="password" placeholder="Password" onChange={inputChange('password')} />
-        <input type="password" placeholder="Confirm Password" onChange={inputChange('confirmPassword')} />
+        <input type="text" placeholder="Username" onChange={inputChange('username')} onKeyDown={enterKey(1)} />
+        <input type="password" placeholder="Password" onChange={inputChange('password')} onKeyDown={enterKey(1)} />
+        <input type="password" placeholder="Confirm Password" onChange={inputChange('confirmPassword')} onKeyDown={enterKey(1)} />
         <div>
           <button onClick={signup}>Sign Up</button>
         </div>

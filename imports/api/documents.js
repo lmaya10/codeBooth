@@ -52,5 +52,19 @@ Meteor.methods({
     // else {
     //   throw new Meteor.Error('No Document');
     // }
+  },
+  'document.delete'(docId) {
+    if (!this.userId) {
+      throw new Meteor.Error('Not Authorized');
+    }
+
+    const doc = Documents.findOne({ _id: docId });
+    if (doc) {
+      const ownerId = doc.ownerId;
+      const owners = doc.sharedWith.filter(s => s.rol === 'Owner').map(s => s.username);
+      if (ownerId === Meteor.user()._id || owners.includes(Meteor.user().username)) {
+        return callToColl(Documents, 'remove', { _id: docId });
+      }
+    }
   }
 });
