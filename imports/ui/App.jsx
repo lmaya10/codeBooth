@@ -11,6 +11,9 @@ import { call } from '../utils/mongo';
 
 const App = ({ user }) => {
 
+   /*
+   Cuando se maneja solo por tab deberia iluminarse las cosas para saber uno donde esta parado porque no es claro y no se sabe a que se esta intentando acceder
+   */ 
   const [state, setState] = useState(0);
   const [profileState, setProfileState] = useState(1);
   const [toast, setToast] = useState(undefined);
