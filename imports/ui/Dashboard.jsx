@@ -36,7 +36,7 @@ const Dashboard = ({ myDocuments, createDoc, showDocument }) => {
     <div id="dashboard">
       <span>My Dashboard</span>
       <div>
-        <button onClick={() => createDoc()}>
+        <button aria-label="create" onClick={() => createDoc()}>
           <i className="fas fa-plus" />
         </button>
         <div id="document-container">
@@ -46,10 +46,10 @@ const Dashboard = ({ myDocuments, createDoc, showDocument }) => {
               <span>{formatDate(d.createdAt)}</span>
               <span>{d.username}</span>
               <div>
-                <button onClick={clickH(0, d._id)}>
+                <button aria-label="delete" onClick={clickH(0, d._id)}>
                   <i className="fas fa-trash" />
                 </button>
-                <button onClick={clickH(1, d._id)}>
+                <button hidden aria-label="share" onClick={clickH(1, d._id)}>
                   <i className="fas fa-share-alt" />
                 </button>
               </div>
@@ -74,7 +74,7 @@ const Dashboard = ({ myDocuments, createDoc, showDocument }) => {
 Dashboard.propTypes = {
   myDocuments: PropTypes.array,
   createDoc: PropTypes.func.isRequired,
-  showDocument: PropTypes.func.isRequired
+  showDocument: PropTypes.func.isRequired,
 };
 
 export default withTracker((props) => {

@@ -95,7 +95,7 @@ const Editor = ({ showToast, document, showDocument, saveShare }) => {
   const save = () => {
     if (!document) {
       if (!name) {
-        showToast({ state: 'Error', msg: 'Please provide a name to the document' });
+        showToast({ state: 'Error', msg: 'Please provide a name for the document' });
       }
       else {
         (async () => {
@@ -122,23 +122,25 @@ const Editor = ({ showToast, document, showDocument, saveShare }) => {
     <div id="editor">
       <div>
         <div id="name-container">
-          <button onClick={save}>
+          <button aria-label="save" onClick={save}>
             <i className="fas fa-save" />
           </button>
           <input
+            aria-label="booth name"
             placeholder="Unnamed Document"
             value={name}
             onChange={e => setName(e.target.value)}
             className={name ? 'non-empty' : ''} />
         </div>
-        <button onClick={execute}><i className="fas fa-play"></i></button>
-        <button className={docId ? '' : 'hidden'} onClick={() => setShowShare(true)}>
+        <button aria-label="run" onClick={execute}><i className="fas fa-play"></i></button>
+        <button aria-label="share" className={docId ? '' : 'hidden'} onClick={() => setShowShare(true)}>
           <i className="fas fa-share-alt" />
         </button>
       </div>
       <div>
         <div id="editable">
           <textarea
+            aria-label="code booth"
             ref={inputRef}
             autoFocus
             onKeyDown={bindKeys}

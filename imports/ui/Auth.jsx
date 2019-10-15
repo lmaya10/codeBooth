@@ -70,8 +70,8 @@ const Auth = ({ changeState, showToast }) => {
   const renders = [
     (
       <div key="1">
-        <input type="text" placeholder="Username" onChange={inputChange('username')} onKeyDown={enterKey(0)} />
-        <input type="password" placeholder="Password" onChange={inputChange('password')} onKeyDown={enterKey(0)} />
+        <input type="text" placeholder="Username" aria-label="username" onChange={inputChange('username')} onKeyDown={enterKey(0)} />
+        <input type="password" placeholder="Password" aria-label="password" onChange={inputChange('password')} onKeyDown={enterKey(0)} />
         <div>
           <button onClick={login}>Log In</button>
         </div>
@@ -79,9 +79,9 @@ const Auth = ({ changeState, showToast }) => {
     ),
     (
       <div key="2">
-        <input type="text" placeholder="Username" onChange={inputChange('username')} onKeyDown={enterKey(1)} />
-        <input type="password" placeholder="Password" onChange={inputChange('password')} onKeyDown={enterKey(1)} />
-        <input type="password" placeholder="Confirm Password" onChange={inputChange('confirmPassword')} onKeyDown={enterKey(1)} />
+        <input type="text" placeholder="Username" aria-label="username" onChange={inputChange('username')} onKeyDown={enterKey(1)} />
+        <input type="password" placeholder="Password" aria-label="password" onChange={inputChange('password')} onKeyDown={enterKey(1)} />
+        <input type="password" placeholder="Confirm Password" aria-label="confirm password" onChange={inputChange('confirmPassword')} onKeyDown={enterKey(1)} />
         <div>
           <button onClick={signup}>Sign Up</button>
         </div>
@@ -94,7 +94,7 @@ const Auth = ({ changeState, showToast }) => {
       <div id="auth">
         <div>
           <div>
-            <h3>Start sharing code in real time</h3>
+            <h2>Start sharing code in real time</h2>
             <span>{state === 0 ? 'You\'re one of ours' : 'Join the dark forces'}</span>
           </div>
           <div>

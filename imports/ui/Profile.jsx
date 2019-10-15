@@ -5,14 +5,23 @@ import { withTracker } from 'meteor/react-meteor-data';
 import '../styles/Profile.css';
 import Explore from './Explore';
 import Dashboard from './Dashboard';
+import { call } from '../utils/mongo';
+
 
 const Profile = ({ user, createDoc, showDocument, status, logout }) => {
 
   const [state, setState] = useState(status);
 
+  const saveShare = (docId, shares) => {
+    (async () => {
+      await call('document.setShares', docId, shares);
+    })();
+  };
+ 
+
   const renders = {
     0: <Explore showDocument={showDocument}/>,
-    1: <Dashboard createDoc={createDoc} showDocument={showDocument}/>,
+    1: <Dashboard createDoc={createDoc} showDocument={showDocument} saveShare={saveShare} />,
     2: undefined
   };
 

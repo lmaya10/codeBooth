@@ -53,25 +53,25 @@ const Share = ({ document, show, closeShare, saveShare }) => {
           <div>
             {rows.map((r, i) => (
               <div key={`b-${i}`}>
-                <input placeholder="username" value={r.username} onChange={setUsername(i)} />
-                <select value={r.rol} onChange={setRol(i)}>
+                <input aria-label="user" placeholder="username" value={r.username} onChange={setUsername(i)} />
+                <select aria-label="role" value={r.rol} onChange={setRol(i)}>
                   <option value="Reader">Reader</option>
                   <option value="Editor">Writter</option>
                   <option value="Owner">Owner</option>
                 </select>
-                <button onClick={delRow(document.sharedWith.length + i)}><i className="fas fa-times"></i></button>
+                <button aria-label="delete" onClick={delRow(document.sharedWith.length + i)}><i className="fas fa-times"></i></button>
               </div>
             ))}
           </div>
           <div>
-            <button onClick={addRow}>
+            <button aria-label="add participant" onClick={addRow}>
               <i className="fas fa-plus" />
             </button>
           </div>
         </div>
         <div>
-          <button onClick={() => saveShare(rows)}>Ok</button>
-          <button onClick={closeShare}>Cancel</button>
+          <button aria-label="share" onClick={() => saveShare(rows)}>Ok</button>
+          <button aria-label="cancel" onClick={closeShare}>Cancel</button>
         </div>
       </div>
     </div>

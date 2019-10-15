@@ -68,8 +68,7 @@ const App = ({ user }) => {
 
   const saveShare = (docId, shares) => {
     (async () => {
-      const rta = await call('document.setShares', docId, shares);
-      console.log(rta);
+      await call('document.setShares', docId, shares);
     })();
   };
 
@@ -85,14 +84,14 @@ const App = ({ user }) => {
       <div id="header" className={state === 3 ? 'no-shadow' : ''}>
         <h1>Code Booth</h1>
         <div id="right-menu" className={state === 3 ? '' : 'hidden'}>
-          <button onClick={() => setShowMenu(s => !s)}>
+          <button aria-label="menu" onClick={() => setShowMenu(s => !s)}>
             <i className="fas fa-user-circle"></i>
           </button>
           <div className={showMenu ? '' : 'hidden'}>
-            <button onClick={() => goMenu(0)}>Explore</button>
-            <button onClick={() => goMenu(1)}>Dashboard</button>
-            <button onClick={() => goMenu(2)}>Settings</button>
-            <button onClick={logOut}>Log Out</button>
+            <button aria-label="explore" onClick={() => goMenu(0)}>Explore</button>
+            <button aria-label="dashboard" onClick={() => goMenu(1)}>Dashboard</button>
+            <button aria-label="settings" onClick={() => goMenu(2)}>Settings</button>
+            <button aria-label="log out" onClick={logOut}>Log Out</button>
           </div>
         </div>
       </div>
