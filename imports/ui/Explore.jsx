@@ -7,6 +7,8 @@ import '../styles/Explorer.css';
 import { formatDate } from '../utils/date';
 
 const Explore = ({ documents, showDocument }) => {
+  /* Cuando se hace click sobre este tab la pantalla se queda en blanco y no hay como volver*/
+  
   return (
     <div id="explorer">
       <span>Explore Scripts</span>
